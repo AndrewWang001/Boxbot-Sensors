@@ -108,7 +108,7 @@ xTaskCreate(flywheel_task, "flywheel_task", 2048, NULL, 5, &ledTaskHandle3);
 
 xTaskCreate(&servoRotate_task, "servoRotate_task", 2048, NULL, 6, &ledTaskHandle4);
 
-xTaskCreate(leftright_motor_task, "leftright_motor_task", 2048, NULL, 4, &ledTaskHandle5);
+xTaskCreate(leftright_motor_task, "leftright_motor_task", 2048, NULL, 7, &ledTaskHandle5);
 
 
 }
