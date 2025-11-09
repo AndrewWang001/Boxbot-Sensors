@@ -1,0 +1,15 @@
+build/
+managed_components/
+.cache/
+sdkconfig
+sdkconfig.old
+sdkconfig.*.bak
+.vscode/
+.idea/
+compile_commands.json
+.ccls-cache/
+.clangd-cache/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
