@@ -4,14 +4,18 @@
 #include "freertos/task.h"
 #include "driver/gpio.h"
 #include "esp_log.h"
+#include "esp_err.h"
 #include "sdkconfig.h"
 #include "driver/ledc.h"
 #include "esp_task_wdt.h"
+#include "driver/mcpwm.h"
+#include "driver/uart.h"
 
 #include "init_led.h"
 #include "btn_led.h"
 #include "servo_rotate.h"
 #include "flywheel.h"
+#include "leftright_motor.h"
 
 // Define the GPIO pins
 #define LED_GPIO GPIO_NUM_15 
@@ -23,10 +27,13 @@
 #define IN1 GPIO_NUM_21
 #define ENA GPIO_NUM_18     
 
+#define SERVO_PIN GPIO_NUM_13
+
 TaskHandle_t ledTaskHandle = NULL;
 TaskHandle_t ledTaskHandle2 = NULL;
 TaskHandle_t ledTaskHandle3 = NULL;
 TaskHandle_t ledTaskHandle4 = NULL;
+TaskHandle_t ledTaskHandle5 = NULL;
 
 const char *TAG = "APP";
 
@@ -97,9 +104,11 @@ xTaskCreate(btnLED_task, "btnLED_task", 2 * configMINIMAL_STACK_SIZE, NULL, 3, &
 
 xTaskCreate(init_led_task, "init_led_task", 2 * configMINIMAL_STACK_SIZE, NULL, 2, &ledTaskHandle2);
 
-xTaskCreate(flywheel_task, "flywheel_task", 2048, NULL, 4, &ledTaskHandle3);
+xTaskCreate(flywheel_task, "flywheel_task", 2048, NULL, 5, &ledTaskHandle3);
 
-xTaskCreate(&servoRotate_task, "servoRotate_task", 2048, NULL, 5, &ledTaskHandle4);
+xTaskCreate(&servoRotate_task, "servoRotate_task", 2048, NULL, 6, &ledTaskHandle4);
+
+xTaskCreate(leftright_motor_task, "leftright_motor_task", 2048, NULL, 4, &ledTaskHandle5);
 
 
 }
