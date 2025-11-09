@@ -3,6 +3,7 @@
 
 #include "driver/mcpwm.h"
 #include "driver/uart.h"
+#include "driver/gpio.h"
 
 
 // MG996R Servo specifications
