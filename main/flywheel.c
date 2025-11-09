@@ -50,7 +50,9 @@ void flywheel_task(void *pvParameters) {
 
     // --- State ---
     const int DUTY_MAX   = (1 << 10) - 1;// 1023
-    const int STEP       = 16;// ramp granularity
+    //const int STEP       = 16;// ramp granularity
+    const int STEP       = (0.6 * DUTY_MAX) / 200; // Gradual increase to 90% in 200 steps
+    
     const TickType_t DT  = pdMS_TO_TICKS(10);
     int current_duty     = 0;
     int target_duty      = 0;// start stopped
@@ -66,7 +68,8 @@ void flywheel_task(void *pvParameters) {
                     vTaskDelay(pdMS_TO_TICKS(5));
                 }
                 motor_on   = !motor_on;
-                target_duty = motor_on ? DUTY_MAX : 0;
+                //target_duty = motor_on ? DUTY_MAX : 0;
+                target_duty = motor_on ? (0.6 * DUTY_MAX) : 0; // Set target to 90% power when motor is on
             }
         }
 
